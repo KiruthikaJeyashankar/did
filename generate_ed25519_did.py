@@ -25,6 +25,16 @@ print(f"🔐 Private Key (Base64): {private_key_b64}")
 print(f"🔑 Public Key (Base64): {public_key_b64}")
 print("🔐 Keep your private key safe and secure!")
 
+#  Create JWK structure
+jwk = {
+    "kty": "OKP",
+    "crv": "Ed25519",
+    "x": public_key_b64,
+    "alg": "EdDSA",
+    "key_ops": ["sign", "verify"],
+    "use": "sig"
+}
+
 
 # 3. Define your DID
 domain = "KiruthikaJeyashankar.github.io:did"
@@ -43,7 +53,8 @@ did_document = {
             "id": key_id,
             "type": "Ed25519VerificationKey2020",
             "controller": did,
-            "publicKeyMultibase": multibase_key
+            # "publicKeyMultibase": multibase_key
+            "publicKeyJwk": jwk
         }
     ],
     "assertionMethod": [
