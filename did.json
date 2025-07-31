@@ -12,7 +12,7 @@
       "publicKeyJwk": {
         "kty": "OKP",
         "crv": "Ed25519",
-        "x": "5Gkh7kcvir1nKUxZSbZIfa-CMJ-7K4F8NGamMhRr8B4",
+        "x": "hPSkhM-ZlFfpakWvbhYrmTnVspE2RPnKP4_UpXJAabs",
         "alg": "EdDSA",
         "key_ops": [
           "sign",
