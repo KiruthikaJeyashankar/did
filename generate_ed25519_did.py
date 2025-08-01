@@ -1,84 +1,72 @@
-import base58
-import json
-import sys
-import subprocess
-import base64
-
-from nacl.signing import SigningKey
-from nacl.encoding import RawEncoder
-
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
-# Generate a new Ed25519 private key
-private_key = ed25519.Ed25519PrivateKey.generate()
+import base64
+import json
+from cryptography.hazmat.primitives.asymmetric import ed25519
+from cryptography.hazmat.primitives import serialization
 
-# Obtain the corresponding public key
+# Base64URL encode (no padding)
+def base64url_encode(data: bytes) -> str:
+    return base64.urlsafe_b64encode(data).rstrip(b'=').decode('utf-8')
+
+# Generate Ed25519 key pair
+private_key = ed25519.Ed25519PrivateKey.generate()
 public_key = private_key.public_key()
 
-# Serialize the private key to bytes (e.g., PEM format)
-private_pem = private_key.private_bytes(
-    encoding=serialization.Encoding.PEM,
-    format=serialization.PrivateFormat.PKCS8,
-    encryption_algorithm=serialization.NoEncryption()  # Use NoEncryption for unencrypted keys
+# Raw bytes
+private_key_raw = private_key.private_bytes(
+    encoding=serialization.Encoding.Raw,
+    format=serialization.PrivateFormat.Raw,
+    encryption_algorithm=serialization.NoEncryption()
 )
 
-# Serialize the public key to bytes (e.g., PEM format)
-public_pem = public_key.public_bytes(
-    encoding=serialization.Encoding.PEM,
-    format=serialization.PublicFormat.SubjectPublicKeyInfo
-)
-
-print("Private Key (PEM format):\n", private_pem.decode())
-print("\nPublic Key (PEM format):\n", public_pem.decode())
-
-# Example of serializing to raw bytes (32 bytes for public key)
-public_raw_bytes = public_key.public_bytes(
+public_key_raw = public_key.public_bytes(
     encoding=serialization.Encoding.Raw,
     format=serialization.PublicFormat.Raw
 )
 
-# # 1. Generate an Ed25519 key pair
-# signing_key = SigningKey.generate()
-# verify_key = signing_key.verify_key
-# public_key_bytes = verify_key.encode(encoder=RawEncoder)
-# private_key_bytes = signing_key.encode()
+# Convert to Base64URL
+x = base64url_encode(public_key_raw)
+d = base64url_encode(private_key_raw)
 
-# # 2. Encode the public key as Multibase base58btc (starts with "z")
-# multibase_key = "z" + base58.b58encode(public_key_bytes).decode("utf-8")
-
-# # 2.1 Output the private key in base64 format
-# # private_key_b64 = base64.urlsafe_b64encode(private_key_bytes).decode("utf-8").rstrip("=")
-# # private_key_b64 = base64.b64encode(private_key_bytes).decode("utf-8").rstrip("=")
-# public_key_b64 = base64.urlsafe_b64encode(public_key_bytes).decode("utf-8").rstrip("=")
-
-
-# print("✅ Ed25519 key pair generated successfully!")
-# print("🔐 Keep your private key safe and secure!")
-
-# #  Create JWK structure
-# jwk = {
-#     "kty": "OKP",
-#     "crv": "Ed25519",
-#     "x": public_key_b64,
-#     "alg": "EdDSA",
-#     # "key_ops": ["sign", "verify"],
-#     # "use": "sig"
-# }
-# 3. Create JWK structure
-public_key_base64 = base64.urlsafe_b64encode(public_raw_bytes).decode("utf-8").rstrip("=")
-private_key_b64 = base64.urlsafe_b64encode(private_pem).decode("utf-8").rstrip("=")
-jwk = {
+# Public JWK
+public_jwk = {
     "kty": "OKP",
     "crv": "Ed25519",
-    "x": public_key_base64,
+    "x": x,
     "alg": "EdDSA",
-    # "key_ops": ["sign", "verify"],
-    # "use": "sig"
+    "key_ops": ["verify"],
+    "use": "sig"
 }
 
+# Private JWK (includes "d" for private key)
+private_jwk = {
+    **public_jwk,
+    "key_ops": ["sign"],
+    "d": d
+}
+
+# Pretty print JWKs
+print("🔐 Private JWK:\n", json.dumps(private_jwk, indent=2))
+print("\n🔓 Public JWK:\n", json.dumps(public_jwk, indent=2))
+
+private_key_bytes = private_key.private_bytes(
+    encoding=serialization.Encoding.Raw,
+    format=serialization.PrivateFormat.Raw,
+    encryption_algorithm=serialization.NoEncryption()
+)
+private_key_b64 = base64.b64encode(private_key_bytes).decode("utf-8")
+
+# Export public key in raw format and encode to base64
+public_key_bytes = public_key.public_bytes(
+    encoding=serialization.Encoding.Raw,
+    format=serialization.PublicFormat.Raw
+)
+public_key_b64 = base64.b64encode(public_key_bytes).decode("utf-8")
+
 print(f"🔐 Private Key (Base64): {private_key_b64}")
-print(f"🔑 Public Key (Base64): {public_key_base64}")
+print(f"🔑 Public Key (Base64): {public_key_b64}")
 
 # 3. Define your DID
 domain = "KiruthikaJeyashankar.github.io:did"
@@ -98,7 +86,7 @@ did_document = {
             "type": "Ed25519VerificationKey2020",
             "controller": did,
             # "publicKeyMultibase": multibase_key
-            "publicKeyJwk": jwk
+            "publicKeyJwk": public_jwk
         }
     ],
     "assertionMethod": [
