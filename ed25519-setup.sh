@@ -16,7 +16,7 @@ REQUIRED_PACKAGES=(
     jwcrypto
     requests
     pynacl
-    jwcrypto
+    cryptography
 )
 
 echo "📦 Installing required packages..."
