@@ -17,7 +17,8 @@ private_key_bytes = signing_key.encode()
 multibase_key = "z" + base58.b58encode(public_key_bytes).decode("utf-8")
 
 # 2.1 Output the private key in base64 format
-private_key_b64 = base64.urlsafe_b64encode(private_key_bytes).decode("utf-8").rstrip("=")
+# private_key_b64 = base64.urlsafe_b64encode(private_key_bytes).decode("utf-8").rstrip("=")
+private_key_b64 = base64.b64encode(private_key_bytes).decode("utf-8").rstrip("=")
 public_key_b64 = base64.urlsafe_b64encode(public_key_bytes).decode("utf-8").rstrip("=")
 
 print("✅ Ed25519 key pair generated successfully!")
@@ -31,8 +32,8 @@ jwk = {
     "crv": "Ed25519",
     "x": public_key_b64,
     "alg": "EdDSA",
-    "key_ops": ["sign", "verify"],
-    "use": "sig"
+    # "key_ops": ["sign", "verify"],
+    # "use": "sig"
 }
 
 
