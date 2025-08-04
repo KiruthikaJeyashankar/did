@@ -40,6 +40,15 @@ public_jwk = {
     "use": "sig"
 }
 
+# Public key in pem format
+public_key_pem = public_key.public_bytes(
+    encoding=serialization.Encoding.PEM,
+    format=serialization.PublicFormat.SubjectPublicKeyInfo
+)
+
+# print("🔑 Public Key (PEM):\n", public_key_pem)
+print("🔑 Public Key (PEM):\n", public_key_pem.decode("utf-8"))
+
 # Private JWK (includes "d" for private key)
 private_jwk = {
     **public_jwk,
@@ -86,7 +95,8 @@ did_document = {
             "type": "Ed25519VerificationKey2020",
             "controller": did,
             # "publicKeyMultibase": multibase_key
-            "publicKeyJwk": public_jwk
+            # "publicKeyJwk": public_jwk
+            "publicKeyPem": public_key_pem.decode("utf-8")
         }
     ],
     "assertionMethod": [

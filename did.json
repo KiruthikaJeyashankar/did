@@ -9,16 +9,7 @@
       "id": "did:web:KiruthikaJeyashankar.github.io:did#key-1",
       "type": "Ed25519VerificationKey2020",
       "controller": "did:web:KiruthikaJeyashankar.github.io:did",
-      "publicKeyJwk": {
-        "kty": "OKP",
-        "crv": "Ed25519",
-        "x": "KlfKRY-ciC9by8Sw6m9dlhudHG_ktAaI0oOmGRE21cg",
-        "alg": "EdDSA",
-        "key_ops": [
-          "verify"
-        ],
-        "use": "sig"
-      }
+      "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAtIxzXj8L0Q32SpWw6HykUUV4Zvjea+N+tkFcY2BVVSA=\n-----END PUBLIC KEY-----\n"
     }
   ],
   "assertionMethod": [
