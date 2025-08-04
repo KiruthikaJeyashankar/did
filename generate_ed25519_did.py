@@ -49,6 +49,10 @@ public_key_pem = public_key.public_bytes(
 # print("🔑 Public Key (PEM):\n", public_key_pem)
 print("🔑 Public Key (PEM):\n", public_key_pem.decode("utf-8"))
 
+# Public key in Hex format
+public_key_hex = public_key_raw.hex()
+print(f"🔑 Public Key (Hex): {public_key_hex}")
+
 # Private JWK (includes "d" for private key)
 private_jwk = {
     **public_jwk,
@@ -96,7 +100,8 @@ did_document = {
             "controller": did,
             # "publicKeyMultibase": multibase_key
             # "publicKeyJwk": public_jwk
-            "publicKeyPem": public_key_pem.decode("utf-8")
+            # "publicKeyPem": public_key_pem.decode("utf-8")
+            "publicKeyHex": public_key_hex
         }
     ],
     "assertionMethod": [
