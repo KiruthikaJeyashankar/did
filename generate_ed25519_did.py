@@ -2,6 +2,7 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
 import base64
+import base58
 import json
 from cryptography.hazmat.primitives.asymmetric import ed25519
 from cryptography.hazmat.primitives import serialization
@@ -118,3 +119,33 @@ print(f"🌐 Host this at: https://{domain}/.well-known/did.json")
 
 print(f"📄 DID Document: {did}")
 print(f"🔗 Key ID: {key_id}")
+
+# create a did:jwk for the public key
+# reference - https://github.com/quartzjer/did-jwk/blob/main/spec.md#x25519
+
+did_jwk = "did:jwk:" + base64url_encode(json.dumps(public_jwk).encode('utf-8'))
+
+print(f"🔗 DID JWK: {did_jwk}")
+
+## Create a did:key for the public key
+# Prefix it with the multicodec for Ed25519: 0xed (hex)
+# Get raw public key bytes (32 bytes)
+public_bytes = public_key.public_bytes(
+    encoding=serialization.Encoding.Raw,
+    format=serialization.PublicFormat.Raw
+)
+
+# Correct multicodec prefix for Ed25519
+multicodec_prefixed = b'\xed\x01' + public_bytes  # 0xED == 237
+
+# Base58btc encode
+did_key = "did:key:z" + base58.b58encode(multicodec_prefixed).decode('utf-8')
+
+print("✅ DID Key:", did_key)
+
+sample_did_key = "did:key:z6MkpiJgQdNWUzyojaFuCzQ1MWvSSaxUfL1tvbcRfqWFoJRK"
+# Debug
+decoded = base58.b58decode(sample_did_key[9:])
+print("🔍 Decoded Bytes:", decoded.hex())
+print("🔍 Starts with 0xED:", decoded[0] == 0xED)
+print("length:", len(decoded))

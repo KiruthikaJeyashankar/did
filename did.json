@@ -9,7 +9,7 @@
       "id": "did:web:KiruthikaJeyashankar.github.io:did#key-1",
       "type": "Ed25519VerificationKey2020",
       "controller": "did:web:KiruthikaJeyashankar.github.io:did",
-      "publicKeyHex": "87ff6b061b586d100b7ed5a39cdac75c82e2c76df42c8a72b03a44c30e1ebbd4"
+      "publicKeyHex": "7a835ee798393c356876d810f09f5e369e64a0130154598bfc48316615dbb89c"
     }
   ],
   "assertionMethod": [
