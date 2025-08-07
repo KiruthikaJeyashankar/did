@@ -31,6 +31,11 @@ public_key_raw = public_key.public_bytes(
 x = base64url_encode(public_key_raw)
 d = base64url_encode(private_key_raw)
 
+# DID and Key ID
+domain = "KiruthikaJeyashankar.github.io:did"
+did = f"did:web:{domain}"
+key_id = f"{did}#key-1"
+
 # Public JWK
 public_jwk = {
     "kty": "OKP",
@@ -38,6 +43,7 @@ public_jwk = {
     "x": x,
     "alg": "EdDSA",
     "key_ops": ["verify"],
+    "kid": key_id,
     "use": "sig"
 }
 
@@ -81,11 +87,6 @@ public_key_b64 = base64.b64encode(public_key_bytes).decode("utf-8")
 
 print(f"🔐 Private Key (Base64): {private_key_b64}")
 print(f"🔑 Public Key (Base64): {public_key_b64}")
-
-# 3. Define your DID
-domain = "KiruthikaJeyashankar.github.io:did"
-did = f"did:web:{domain}"
-key_id = f"{did}#key-1"
 
 # 4. Build the DID Document
 did_document = {
