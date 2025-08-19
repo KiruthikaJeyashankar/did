@@ -6,12 +6,44 @@
   "id": "did:web:KiruthikaJeyashankar.github.io:did",
   "verificationMethod": [
     {
+      "id": "did:web:KiruthikaJeyashankar.github.io:did#key-1",
+      "type": "Ed25519VerificationKey2020",
+      "controller": "did:web:KiruthikaJeyashankar.github.io:did",
+      "publicKeyHex": "8dd962c7810ed7662683927e6f746f7962f312b5cb0532dc72964bacec5723c6"
+    },
+    {
+      "id": "did:web:KiruthikaJeyashankar.github.io:did#key-2",
+      "type": "Ed25519VerificationKey2020",
+      "controller": "did:web:KiruthikaJeyashankar.github.io:did",
+      "publicKeyMultibase": "multibase_key"
+    },
+    {
+      "id": "did:web:KiruthikaJeyashankar.github.io:did#key-3",
+      "type": "Ed25519VerificationKey2020",
+      "controller": "did:web:KiruthikaJeyashankar.github.io:did",
+      "publicKeyJwk": {
+        "kty": "OKP",
+        "crv": "Ed25519",
+        "x": "jdlix4EO12Ymg5J-b3RveWLzErXLBTLccpZLrOxXI8Y",
+        "alg": "EdDSA",
+        "key_ops": [
+          "verify"
+        ],
+        "kid": "did:web:KiruthikaJeyashankar.github.io:did#key-1",
+        "use": "sig"
+      }
+    },
+    {
       "id": "did:web:KiruthikaJeyashankar.github.io:did#key-4",
       "type": "Ed25519VerificationKey2020",
-      "controller": "did:web:KiruthikaJeyashankar.github.io:did"
+      "controller": "did:web:KiruthikaJeyashankar.github.io:did",
+      "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAjdlix4EO12Ymg5J+b3RveWLzErXLBTLccpZLrOxXI8Y=\n-----END PUBLIC KEY-----\n"
     }
   ],
   "assertionMethod": [
+    "did:web:KiruthikaJeyashankar.github.io:did#key-1",
+    "did:web:KiruthikaJeyashankar.github.io:did#key-2",
+    "did:web:KiruthikaJeyashankar.github.io:did#key-3",
     "did:web:KiruthikaJeyashankar.github.io:did#key-4"
   ]
 }
