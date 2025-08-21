@@ -9,13 +9,13 @@
       "id": "did:web:KiruthikaJeyashankar.github.io:did#key-1",
       "type": "Ed25519VerificationKey2020",
       "controller": "did:web:KiruthikaJeyashankar.github.io:did",
-      "publicKeyHex": "8dd962c7810ed7662683927e6f746f7962f312b5cb0532dc72964bacec5723c6"
+      "publicKeyHex": "e6dbd4e24fd31807c302bbb72df4b9dea6df1f38218dcd24bcf1806f6554c167"
     },
     {
       "id": "did:web:KiruthikaJeyashankar.github.io:did#key-2",
       "type": "Ed25519VerificationKey2020",
       "controller": "did:web:KiruthikaJeyashankar.github.io:did",
-      "publicKeyMultibase": "z6Mkozynf9KohYj1Jg6m9ec8T7YrQL3rHD89Virpxioz7eW1"
+      "publicKeyMultibase": "multibase_key"
     },
     {
       "id": "did:web:KiruthikaJeyashankar.github.io:did#key-3",
@@ -24,7 +24,7 @@
       "publicKeyJwk": {
         "kty": "OKP",
         "crv": "Ed25519",
-        "x": "jdlix4EO12Ymg5J-b3RveWLzErXLBTLccpZLrOxXI8Y",
+        "x": "5tvU4k_TGAfDAru3LfS53qbfHzghjc0kvPGAb2VUwWc",
         "alg": "EdDSA",
         "key_ops": [
           "verify"
@@ -37,7 +37,7 @@
       "id": "did:web:KiruthikaJeyashankar.github.io:did#key-4",
       "type": "Ed25519VerificationKey2020",
       "controller": "did:web:KiruthikaJeyashankar.github.io:did",
-      "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAjdlix4EO12Ymg5J+b3RveWLzErXLBTLccpZLrOxXI8Y=\n-----END PUBLIC KEY-----\n"
+      "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA5tvU4k/TGAfDAru3LfS53qbfHzghjc0kvPGAb2VUwWc=\n-----END PUBLIC KEY-----\n"
     }
   ],
   "assertionMethod": [
