@@ -47,6 +47,7 @@
     }
   ],
   "assertionMethod": [
+    "did:web:KiruthikaJeyashankar.github.io:did#key-0",
     "did:web:KiruthikaJeyashankar.github.io:did#key-1",
     "did:web:KiruthikaJeyashankar.github.io:did#key-2",
     "did:web:KiruthikaJeyashankar.github.io:did#key-3",
