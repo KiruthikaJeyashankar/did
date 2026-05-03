@@ -6,6 +6,12 @@
   "id": "did:web:kiruthika.github.io:did",
   "verificationMethod": [
     {
+      "id": "did:web:KiruthikaJeyashankar.github.io:did#key-0",
+      "type": "Ed25519VerificationKey2020",
+      "controller": "did:web:example.com",
+      "publicKeyMultibase": "z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH#z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
+    },
+    {
       "id": "did:web:KiruthikaJeyashankar.github.io:did#key-1",
       "type": "Ed25519VerificationKey2020",
       "controller": "did:web:KiruthikaJeyashankar.github.io:did",
