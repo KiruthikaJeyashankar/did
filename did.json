@@ -10,7 +10,7 @@
       "id": "did:web:KiruthikaJeyashankar.github.io:did#key-0",
       "type": "Ed25519VerificationKey2020",
       "controller": "did:web:KiruthikaJeyashankar.github.io:did",
-      "publicKeyMultibase": "z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH"
+      "publicKeyMultibase": "z6MkkoqQKEWmGCZnPDjQqtfFzR4X9BKRrUeX6RkFvCGnLTw6"
     },
     {
       "id": "did:web:KiruthikaJeyashankar.github.io:did#key-1",
